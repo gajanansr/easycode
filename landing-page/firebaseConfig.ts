@@ -1,6 +1,13 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics, isSupported } from "firebase/analytics";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -16,21 +23,34 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
+// Initialize Firestore
+const db = getFirestore(app);
+
 // Initialize Firebase Analytics only on the client side
 let analytics;
 if (typeof window !== "undefined") {
-  (async () => {
+  const initializeAnalytics = async () => {
     const isAnalyticsSupported = await isSupported();
     if (isAnalyticsSupported) {
       analytics = getAnalytics(app);
     }
-  })();
+  };
+  initializeAnalytics();
 }
 
-const db = getFirestore(app);
-
+// Function to store email in Firestore
 export const storeEmail = async (email: string) => {
   try {
+    // Check if the email already exists before adding
+    const existingEmailQuery = await getDocs(
+      query(collection(db, "emails"), where("email", "==", email))
+    );
+
+    if (!existingEmailQuery.empty) {
+      console.log("Email already exists.");
+      return;
+    }
+
     const docRef = await addDoc(collection(db, "emails"), {
       email: email,
       timestamp: new Date(),
