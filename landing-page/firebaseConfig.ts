@@ -19,9 +19,12 @@ const app = initializeApp(firebaseConfig);
 // Initialize Firebase Analytics only on the client side
 let analytics;
 if (typeof window !== "undefined") {
-  if (isSupported()) {
-    analytics = getAnalytics(app);
-  }
+  (async () => {
+    const isAnalyticsSupported = await isSupported();
+    if (isAnalyticsSupported) {
+      analytics = getAnalytics(app);
+    }
+  })();
 }
 
 const db = getFirestore(app);
