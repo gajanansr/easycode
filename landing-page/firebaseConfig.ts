@@ -53,7 +53,6 @@ export const storeEmail = async (email: string) => {
 
     const docRef = await addDoc(collection(db, "emails"), {
       email: email,
-      timestamp: new Date(),
     });
     console.log("Email stored with ID: ", docRef.id);
   } catch (e) {
