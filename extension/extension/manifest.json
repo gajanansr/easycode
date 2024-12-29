@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "EasyCode",
+  "version": "1.0.0",
+  "description": "Simplify LeetCode problems with AI-powered explanations",
+  "permissions": ["activeTab"],
+  "host_permissions": [
+    "https://leetcode.com/*",
+    "https://your-deployed-backend.vercel.app/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://leetcode.com/problems/*"],
+      "js": ["src/content.js"]
+    }
+  ],
+  "action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  }
+}
