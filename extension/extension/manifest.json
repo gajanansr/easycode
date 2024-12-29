@@ -6,7 +6,7 @@
   "permissions": ["activeTab"],
   "host_permissions": [
     "https://leetcode.com/*",
-    "https://your-deployed-backend.vercel.app/*"
+    "https://easycode-gajanansr.vercel.app/*"
   ],
   "content_scripts": [
     {
