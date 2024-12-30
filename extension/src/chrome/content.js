@@ -56,11 +56,14 @@ function injectSimplifyButton() {
       const problemText = descriptionContainer.textContent;
 
       // Call your API endpoint
-      const response = await fetch("http://localhost:3000/api/simplify", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ problemText }),
-      });
+      const response = await fetch(
+        "https://easycode-backend-indol.vercel.app/api/simplify",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ problemText }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
