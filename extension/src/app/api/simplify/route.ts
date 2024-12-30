@@ -29,6 +29,7 @@ Relatable Example:
 
 Approach:
 [Explain how the user can think about the problem—what steps to consider and how to break it down in a logical manner.]
+
     `;
 
     const result = await model.generateContent(prompt);
@@ -45,13 +46,10 @@ Approach:
         },
       }
     );
-  } catch (error) {
+  } catch (error: any) {
     console.error("API Error:", error);
     return NextResponse.json(
-      {
-        error:
-          error instanceof Error ? error.message : "An unknown error occurred",
-      },
+      { error: error.message },
       {
         status: 500,
         headers: {
@@ -64,7 +62,7 @@ Approach:
   }
 }
 
-export async function OPTIONS() {
+export async function OPTIONS(req: Request) {
   return NextResponse.json(
     {},
     {
