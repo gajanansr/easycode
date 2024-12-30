@@ -17,7 +17,7 @@ export async function POST(req: Request) {
 3. Explain how to approach the problem logicallys, without providing the direct solution. Focus on guiding the thought process.
 
 Here is the problem description: ${problemText}
-Format your response exactly like this (without any markdown symbols, asterisks, or special characters):
+Format your response exactly like this (without markdown symbols, asterisks, or special characters):
 
     Provide your response in this structure:
 
