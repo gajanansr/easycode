@@ -57,7 +57,7 @@ function injectSimplifyButton() {
 
       // Call your API endpoint
       const response = await fetch(
-        "https://easycode-gajanansr.vercel.app/api/simplify",
+        "https://easycode-extension.vercel.app/api/simplify",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
