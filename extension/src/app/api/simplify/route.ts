@@ -14,7 +14,7 @@ export async function POST(req: Request) {
 
 1. take the data structure in the problem description and explain focusing on the data structures and core task the problem states to be done. Avoid unncessary details.
 2. Avoid unnecessary analogies or stories, but do provide a relatable, simple example after the explanation to make the problem clearer, explain so user can visualize the problem.
-3. Explain how to approach the problem logically, without providing the direct solution. Focus on guiding the thought process.
+3. Explain how to approach the problem logicallys, without providing the direct solution. Focus on guiding the thought process.
 
 Here is the problem description: ${problemText}
 Format your response exactly like this (without any markdown symbols, asterisks, or special characters):
@@ -46,29 +46,36 @@ Approach:
         },
       }
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("API Error:", error.message);
+      return NextResponse.json(
+        { error: error.message },
+        {
+          status: 500,
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "POST",
+            "Access-Control-Allow-Headers": "Content-Type",
+          },
+        }
+      );
+    }
     console.error("API Error:", error);
     return NextResponse.json(
-      { error: error.message },
-      {
-        status: 500,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "POST",
-          "Access-Control-Allow-Headers": "Content-Type",
-        },
-      }
+      { error: "An unknown error occurred" },
+      { status: 500 }
     );
   }
 }
 
-export async function OPTIONS(req: Request) {
+export async function OPTIONS() {
   return NextResponse.json(
     {},
     {
       headers: {
         "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "POST",
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type",
       },
     }
