@@ -6,7 +6,7 @@
   "permissions": ["activeTab"],
   "host_permissions": [
     "https://leetcode.com/*",
-    "https://easycode-backend-indol.vercel.app/",
+    "https://easycode-backend-indol.vercel.app/*",
     "http://localhost:3000/*"
   ],
   "content_scripts": [
