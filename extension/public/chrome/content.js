@@ -57,7 +57,7 @@ function injectSimplifyButton() {
 
       // Call your API endpoint
       const response = await fetch(
-        "https://easycode-backend-indol.vercel.app/api/simplify",
+        "https://easycode-backend-indol.vercel.app/action/simplify",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
